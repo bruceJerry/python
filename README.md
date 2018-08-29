@@ -2,6 +2,7 @@
 学习python
 
 git 取消对文件或者文件夹的关联
+
 $ git rm --cached <filename>
 
 如果是目录的话：
