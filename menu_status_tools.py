@@ -16,7 +16,7 @@ class MyWindow(QMainWindow):
         save = QAction("保存", self)
         save.setShortcut("Ctrl+S")
         file.addAction(save)
-        file.triggered[QAction].connect(self.processor)
+        file.triggered[QAction].connect(self.processor_menu)
         self.init_tool_bar()
         self.show()
 
@@ -27,9 +27,12 @@ class MyWindow(QMainWindow):
         save = QAction(QIcon("save.png"), "保存文件", self)
         tb.addAction(save)
 
-        tb.actionTriggered[QAction].connect(self.processor)
+        tb.actionTriggered[QAction].connect(self.processor_tool)
 
-    def processor(self, q):
+    def processor_menu(self, q):
+        print(q.text())
+
+    def processor_tool(self, q):
         print(q.text())
 
 
