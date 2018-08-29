@@ -27,7 +27,7 @@ class MyWindow(QMainWindow):
         save = QAction(QIcon("save.png"), "保存文件", self)
         tb.addAction(save)
 
-        tb.actionTriggered[QAction].connect(self.processor_tool) # 发射信号 再次发射
+        tb.actionTriggered[QAction].connect(self.processor_tool) # 发射信号 再次发射  三次取关  四次取关
 
     def processor_menu(self, q):
         print(q.text())
