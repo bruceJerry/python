@@ -1,6 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QPushButton, QMainWindow, QApplication, QDesktopWidget, QLabel
-from PyQt5.QtGui import QIcon, QFont
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from SubSystem import Person
 
@@ -20,6 +20,11 @@ class MyWindow(QMainWindow):
         self.label.setText("改后的标签")
         self.label.setFont(QFont("宋体", 10, QFont.Bold))
         self.label.setAlignment(Qt.AlignCenter)
+        self.label.setAutoFillBackground(True)
+        palette = self.label.palette()
+        palette.setColor(QPalette.Window, Qt.blue)
+        palette.setColor(QPalette.Foreground, Qt.gray)
+        self.label.setPalette(palette)
 
     def center(self):
         screen = QDesktopWidget().screenGeometry()
