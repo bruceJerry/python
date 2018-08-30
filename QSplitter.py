@@ -7,10 +7,11 @@ class MyWindow(QWidget): # 可以动态拖拽的一种布局，少用  先不看
 
     def __init__(self):
         super().__init__()
+        self.setGeometry(300, 300, 300, 300)
         self.ui_init()
 
     def ui_init(self):
-        self.setWindowTitle("网格布局")
+        self.setWindowTitle("Splitter")
         layout = QGridLayout()
         self.setLayout(layout)
 

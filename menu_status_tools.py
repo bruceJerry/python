@@ -23,8 +23,10 @@ class MyWindow(QMainWindow):
     def init_tool_bar(self):
         tb = self.addToolBar("文件")
         open = QAction(QIcon("open.png"), "打开文件", self)
+        open.tag = 1
         tb.addAction(open)
         save = QAction(QIcon("save.png"), "保存文件", self)
+        save.tag = 2
         tb.addAction(save)
 
         tb.actionTriggered[QAction].connect(self.processor_tool) # 发射信号 再次发射  三次取关  四次取关
@@ -33,7 +35,12 @@ class MyWindow(QMainWindow):
         print(q.text())
 
     def processor_tool(self, q):
-        print(q.text())
+        text = q.text()
+        print(text)
+        if text == "打开文件":
+            self.statusBar().showMessage("打开文件工具按钮被点击")
+        elif text == "保存文件":
+            self.statusBar().showMessage("保存文件工具按钮被点击")
 
 
 app = QApplication([])
