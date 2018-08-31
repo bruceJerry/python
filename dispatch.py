@@ -27,6 +27,8 @@ def countTime():
 
 def work():
     timer.start(1000)
+
+def measure():
     workThread.start()
 
 def timeStop():
@@ -50,6 +52,7 @@ timer = QTimer()
 workThread = WorkThread()
 workThread.signal.connect(timeStop)
 btn.clicked.connect(work)
+btn1.clicked.connect(measure)
 timer.timeout.connect(countTime)
 top.show()
 exit(app.exec())
