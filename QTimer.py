@@ -11,7 +11,7 @@ class CountThread(QThread):
         super().__init__()
 
     def run(self):
-        for i in range(10000):
+        for i in range(5000):
             print(i)
             self.usleep(1000)
         self.signal.emit(i)
@@ -31,17 +31,6 @@ class MyTimer(QWidget):
         self.show()
 
         self.ui_init()
-
-    def count_finshed(self, i):
-        self.timer.stop()
-        dialog = QDialog()
-        dialog.setWindowTitle("count运行时间")
-        dialog.setAutoFillBackground(True)
-        Color.setWidgetBackgroundColor(dialog, Qt.yellow)
-        dialog.resize(200, 100)
-        QLabel("最大计数值{}".format(i), dialog)
-        dialog.setWindowModality(Qt.ApplicationModal)  # 只有关闭子窗口才能关闭后面的窗口
-        dialog.exec()
 
     def ui_init(self):
         self.label = QLabel("当前时间")
@@ -69,22 +58,25 @@ class MyTimer(QWidget):
         time_display = time.toString("yyyy-MM-dd hh:mm:ss dddd")  # 设置时间格式
         self.label.setText(time_display)
 
+    def count_finshed(self, i):
+        self.timer.stop()
+        dialog = QDialog()
+        dialog.setWindowTitle("count运行时间")
+        dialog.setAutoFillBackground(True)
+        Color.setWidgetBackgroundColor(dialog, Qt.yellow)
+        dialog.resize(200, 100)
+        QLabel("最大计数值{}".format(i), dialog)
+        dialog.setWindowModality(Qt.ApplicationModal)  # 只有关闭子窗口才能关闭后面的窗口
+        dialog.exec()
+
     def clicked(self):
         tag = self.sender().tag
         if tag == 1:
             self.timer.start(1000)
-            self.btn_start.setEnabled(False)
-            self.btn_end.setEnabled(True)
-            self.timer.singleShot(10000, self.single_shot)   # 后面的参数为定时器超时的回调函数
         elif tag == 2:
             self.timer.stop()
-            self.btn_start.setEnabled(True)
-            self.btn_end.setEnabled(False)
         elif tag == 3:
             self.count_thead.run()
-
-    def single_shot(self):
-        pass
 
 
 app = QApplication(["hello"])
