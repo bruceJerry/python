@@ -8,11 +8,10 @@ class MyTimer(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("定时器")
-        self.setGeometry(200, 200, 400, 400)
+        self.setGeometry(200, 200, 400, 100)
         self.timer = QTimer()
         self.timer.timeout.connect(self.timer_out)
         self.timer.setTimerType(Qt.PreciseTimer)
-        self.timer.start(1000)
         self.ui_init()
         self.show()
 
@@ -33,16 +32,35 @@ class MyTimer(QWidget):
         layout.addWidget(self.btn_end, 1, 1)
         self.setLayout(layout)
 
+    def show_time(self):
+        time = QDateTime.currentDateTime()  # 获取系统时间
+        time_display = time.toString("yyyy-MM-dd hh:mm:ss dddd")  # 设置时间格式
+        self.label.setText(time_display)
+
     def timer_out(self):
-        print("11")
+        self.show_time()
 
     def clicked(self):
         tag = self.sender().tag
         if tag == 1:
-            pass
+            self.timer.start(1000)
+            self.btn_start.setEnabled(False)
+            self.btn_end.setEnabled(True)
+            self.timer.singleShot(10000, self.single_shot)   # 后面的参数为定时器超时的回调函数
         elif tag == 2:
-            pass
+            self.timer.stop()
+            self.btn_start.setEnabled(True)
+            self.btn_end.setEnabled(False)
 
+    def single_shot(self):
+        dialog = QDialog()
+        dialog.setWindowTitle("提示")
+        dialog.setAutoFillBackground(True)
+        Color.setWidgetBackgroundColor(dialog, Qt.yellow)
+        dialog.resize(200, 100)
+        label = QLabel("定时器运行10秒", dialog)
+        dialog.setWindowModality(Qt.ApplicationModal)  # 只有关闭子窗口才能关闭后面的窗口
+        dialog.exec()
 
 app = QApplication(["hello"])
 timer = MyTimer()
