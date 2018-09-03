@@ -76,7 +76,7 @@ class MyTimer(QWidget):
         elif tag == 2:
             self.timer.stop()
         elif tag == 3:
-            self.count_thead.run()
+            self.count_thead.start()
 
 
 app = QApplication(["hello"])
