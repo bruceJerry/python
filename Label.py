@@ -37,7 +37,7 @@ class MyWindow(QMainWindow):
         self.label1.setAlignment(Qt.AlignVCenter)
         self.label1.setAutoFillBackground(True)
         self.label1.setPalette(pal)
-        self.label1.setText("<A href = 'http://www.baidu.com'>欢迎使用baidu</a>")  # html
+        self.label1.setText("<A href = 'http://www.baidu.com'>欢迎使用百度</a>")  # html
         self.label1.setOpenExternalLinks(True)
 
         frame = QWidget()
