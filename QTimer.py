@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 from Utils import Color
 
 
+# pyqt多线程一般做法：
 class CountThread(QThread):
     signal = pyqtSignal(int)
 
