@@ -4,6 +4,7 @@ from PyQt5.QtGui import *
 from Utils import Color
 
 
+# pyqt多线程一般做法：
 class CountThread(QThread):
     signal = pyqtSignal(int)
 
@@ -76,7 +77,7 @@ class MyTimer(QWidget):
         elif tag == 2:
             self.timer.stop()
         elif tag == 3:
-            self.count_thead.start()
+            self.count_thead.start()  #  cheout
 
 
 app = QApplication(["hello"])
