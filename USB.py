@@ -4,6 +4,25 @@ import usb.core
 import usb.control
 import array
 import socketserver
+import struct
+import binhex
+
+""" 
+#  struct test
+struct Header
+{
+    unsigned short id;
+    char[4] tag;
+    unsigned int version;
+    unsigned int count;
+}
+"""
+ss = b"1212 1212121212"
+for x in ss:
+    print(x)
+idx, tag, version, count = struct.unpack("!H4s2l", ss)
+print(idx, tag, version, count)
+
 
 my_array = array.array("B", [0, 1, 2, 3, 4, 4])
 my_array.append(5)
@@ -16,10 +35,10 @@ print("config num = {}".format(config))
 endpoint = dev[0][(0, 0)][0]
 print(endpoint)
 
-langs = usb.util.get_langids(dev)
+langs = usb.util.get_langids(dev)   # 获取描述符的语言列表
 print(langs)
 
-string = usb.util.get_string(dev, 2, 0x0409)
+string = usb.util.get_string(dev, 2, 0x0409)   # 获取usb设备的string描述符
 print(string)
 
 if dev.is_kernel_driver_active(0) is True:
